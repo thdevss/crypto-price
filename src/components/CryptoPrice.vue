@@ -1,11 +1,10 @@
 <template>
-    <b-col col lg="3" md="auto">
+    <b-col col lg="4" md="auto">
         <b-overlay :show="isLoading" rounded="sm">
             <b-alert show :variant="variant">
                 <h4>{{ symbol }}</h4>
                 <h2>$ <span>{{ this.price }}</span></h2>
                 <div class="text-end">
-                    <small>Total Vol: {{ this.volume }}</small><br />
                     <small>H: {{ this.highPrice }}, L: {{ this.lowPrice }}</small>
 
                 </div>
@@ -35,7 +34,6 @@ export default {
         }
     },
     mounted() {
-        this.getPriceFromBinance()
         this.getInformationFromBinance()
 
         setInterval(this.getPriceFromBinance, 5000)
@@ -63,8 +61,15 @@ export default {
                 if(res.data.symbol == this.symbol) {
                     if(res.data.priceChange < 0 && this.variant == 'primary') {
                         this.variant = 'danger'
+                    } else {
+                        if(this.price < res.data.price) {
+                            this.variant = 'success'
+                        } else {
+                            this.variant = 'danger'
+                        }
                     }
 
+                    this.price = this.numberWithCommas(parseFloat(res.data.lastPrice).toFixed(4));
                     this.lowPrice = this.numberWithCommas(parseFloat(res.data.lowPrice).toFixed(4))
                     this.highPrice = this.numberWithCommas(parseFloat(res.data.highPrice).toFixed(4))
                     this.volume = this.numberWithCommas(parseFloat(res.data.volume).toFixed(4))

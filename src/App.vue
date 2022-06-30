@@ -1,25 +1,20 @@
 <template>
-  <b-container class="bv-example-row">
-    <b-row>
-      <CryptoPrice symbol="BTCUSDT" color="success" />
-      <CryptoPrice symbol="BNBUSDT" />
-      <CryptoPrice symbol="ADAUSDT" />
-      <CryptoPrice symbol="XRPUSDT" />
-
-    </b-row>
-  </b-container>
+  <CryptoTable />
 </template>
 
 <script>
-import CryptoPrice from './components/CryptoPrice.vue'
+import CryptoTable from './components/CryptoTable.vue'
 
 export default {
   name: 'App',
   components: {
-    CryptoPrice
-  }
+    CryptoTable
+  },
+
 }
+
 </script>
+
 
 <style>
 #app {
@@ -28,6 +23,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
