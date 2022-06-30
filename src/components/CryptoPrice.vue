@@ -26,10 +26,10 @@ export default {
     },
     data(props) {
         return {
-            price: "",
-            volume: "",
-            lowPrice: "",
-            highPrice: "",
+            price: 0,
+            volume: 0,
+            lowPrice: 0,
+            highPrice: 0,
             variant: (props.color) ? props.color : 'primary',
             isLoading: false
         }
@@ -54,7 +54,7 @@ export default {
                         this.variant = 'danger'
                     }
 
-                    this.price = res.data.price
+                    this.price = this.numberWithCommas(parseFloat(res.data.price).toFixed(4));
                 }
             })
         },
@@ -65,12 +65,15 @@ export default {
                         this.variant = 'danger'
                     }
 
-                    this.lowPrice = res.data.lowPrice
-                    this.highPrice = res.data.highPrice
-                    this.volume = res.data.volume
+                    this.lowPrice = this.numberWithCommas(parseFloat(res.data.lowPrice).toFixed(4))
+                    this.highPrice = this.numberWithCommas(parseFloat(res.data.highPrice).toFixed(4))
+                    this.volume = this.numberWithCommas(parseFloat(res.data.volume).toFixed(4))
 
                 }
             })
+        },
+        numberWithCommas(x) {
+            return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         }
     }
 
