@@ -1,15 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <b-container class="bv-example-row">
+    <b-row>
+      <CryptoPrice symbol="BTCUSDT" color="success" />
+      <CryptoPrice symbol="BNBUSDT" />
+      <CryptoPrice symbol="ADAUSDT" />
+      <CryptoPrice symbol="XRPUSDT" />
+
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CryptoPrice from './components/CryptoPrice.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CryptoPrice
   }
 }
 </script>
